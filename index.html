@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nwankwo Michael | Front-End Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" href="ghostcode1.ico" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="icon" href="images/ghostcode1.ico" type="image/x-icon" />
     <style>
       body {
         font-family: "Inter", sans-serif;
@@ -108,18 +110,32 @@
       }
     </style>
   </head>
-  <body class="min-h-screen">
+  <class="min-h-screen">
+    <!-- Mobile Menu (hidden by default) -->
+    <div
+      class="mobile-menu hidden fixed inset-0 bg-white/90 backdrop-blur-sm z-40 pt-24 px-6"
+    >
+      <div class="flex flex-col space-y-6">
+        <a href="#home" class="nav-link active-nav text-xl">Home</a>
+        <a href="#about" class="nav-link text-xl">About</a>
+        <a href="#skills" class="nav-link text-xl">Skills</a>
+        <a href="#projects" class="nav-link text-xl">Projects</a>
+        <a href="#contact" class="nav-link text-xl">Contact</a>
+      </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
       <div
         class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
       >
-        <a href="#" class="text-2xl font-bold gradient-text"
-          ><img
+        <a href="#" class="text-2xl font-bold gradient-text">
+          <img
             src="https://cradle2career.ng/wp-content/uploads/2025/05/AlbedoBase_XL_create_a_logo_for_software_development_brand_wit_3-1.jpg"
             alt="Nwankwo Michael Logo"
             class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md"
-        /></a>
+          />
+        </a>
         <div class="hidden md:flex space-x-8">
           <a href="#home" class="nav-link active-nav">Home</a>
           <a href="#about" class="nav-link">About</a>
@@ -127,7 +143,7 @@
           <a href="#projects" class="nav-link">Projects</a>
           <a href="#contact" class="nav-link">Contact</a>
         </div>
-        <button class="md:hidden text-gray-700">
+        <button id="mobileMenuButton" class="md:hidden text-gray-700">
           <i class="fas fa-bars text-xl"></i>
         </button>
       </div>
@@ -1019,11 +1035,89 @@
       });
 
       // Mobile menu toggle (would need additional implementation)
-      document
-        .querySelector("button.md\\:hidden")
-        .addEventListener("click", () => {
-          // This would toggle a mobile menu
-          console.log("Mobile menu toggled - would show/hide menu");
+      document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu elements
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const hamburgerButton = document.getElementById('mobileMenuButton');
+            const hamburgerIcon = hamburgerButton.querySelector('i');
+
+            // Toggle mobile menu
+            hamburgerButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                
+                // Toggle between bars and times icon
+                if (mobileMenu.classList.contains('hidden')) {
+                    hamburgerIcon.classList.remove('fa-times');
+                    hamburgerIcon.classList.add('fa-bars');
+                } else {
+                    hamburgerIcon.classList.remove('fa-bars');
+                    hamburgerIcon.classList.add('fa-times');
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('fa-times');
+                    hamburgerIcon.classList.add('fa-bars');
+                });
+            });
+
+            // Your existing animation and scroll code
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("fade-in");
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll(".fade-in").forEach((el) => {
+                observer.observe(el);
+            });
+
+            // Animate skill bars when skills section is in view
+            const skillObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll(".skill-bar").forEach((bar) => {
+                            bar.style.width =
+                                bar.parentElement.previousElementSibling.lastElementChild.textContent;
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            skillObserver.observe(document.getElementById("skills"));
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function(e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute("href")).scrollIntoView({
+                        behavior: "smooth",
+                    });
+
+                    // Update active nav link
+                    document.querySelectorAll(".nav-link").forEach((link) => {
+                        link.classList.remove("active-nav");
+                    });
+                    this.classList.add("active-nav");
+                });
+            });
+
+            // Project card hover effects
+            document.querySelectorAll(".project-card").forEach((card) => {
+                card.addEventListener("mouseenter", () => {
+                    card.querySelector(".project-content").style.opacity = "1";
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.querySelector(".project-content").style.opacity = "0";
+                });
+            });
         });
     </script>
   </body>
