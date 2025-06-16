@@ -1046,15 +1046,44 @@
       });
 
       // Project card hover effects
-      document.querySelectorAll(".project-card").forEach((card) => {
-        card.addEventListener("mouseenter", () => {
-          card.querySelector(".project-content").style.opacity = "1";
-        });
+        document.querySelectorAll(".project-card").forEach((card) => { 
+          const content = card.querySelector(".project-content");
 
-        card.addEventListener("mouseleave", () => {
-          card.querySelector(".project-content").style.opacity = "0";
+         // ===== 1. Desktop Hover Effect =====
+          card.addEventListener("mouseenter", () => {
+            content.style.opacity = "1";
+          });
+          card.addEventListener("mouseleave", () => {
+            content.style.opacity = "0";
+          });
+
+          // ===== 2. Mobile Touch Effect =====
+          card.addEventListener("touchstart", (e) => {
+            e.preventDefault(); // Prevents delay on some devices
+            content.style.opacity = "1";
+          });
+          card.addEventListener("touchend", () => {
+            content.style.opacity = "0";
+          });
+
+          // ===== 3. Scroll-Triggered Effect (Mobile-Friendly) =====
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  // When card is scrolled into view, show content
+                  content.style.opacity = "1";
+                  setTimeout(() => {
+                    content.style.opacity = "0"; // Hide after 2 sec (adjust as needed)
+                  }, 2000);
+                }
+              });
+            },
+            { threshold: 0.5 } // Trigger when 50% visible
+          );
+
+          observer.observe(card);
         });
-      });
 
       // Mobile menu toggle (would need additional implementation)
       document.addEventListener('DOMContentLoaded', function() {
