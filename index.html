@@ -1046,44 +1046,60 @@
       });
 
       // Project card hover effects
-        document.querySelectorAll(".project-card").forEach((card) => { 
-          const content = card.querySelector(".project-content");
+              document.querySelectorAll(".project-card").forEach((card) => {
+        const content = card.querySelector(".project-content");
+        let isTouching = false; // Track touch state
 
-         // ===== 1. Desktop Hover Effect =====
-          card.addEventListener("mouseenter", () => {
+        // ===== 1. Desktop Hover Effect =====
+        card.addEventListener("mouseenter", () => {
+          if (!isTouching) { // Don't interfere with touch
             content.style.opacity = "1";
-          });
-          card.addEventListener("mouseleave", () => {
-            content.style.opacity = "0";
-          });
-
-          // ===== 2. Mobile Touch Effect =====
-          card.addEventListener("touchstart", (e) => {
-            e.preventDefault(); // Prevents delay on some devices
-            content.style.opacity = "1";
-          });
-          card.addEventListener("touchend", () => {
-            content.style.opacity = "0";
-          });
-
-          // ===== 3. Scroll-Triggered Effect (Mobile-Friendly) =====
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  // When card is scrolled into view, show content
-                  content.style.opacity = "1";
-                  setTimeout(() => {
-                    content.style.opacity = "0"; // Hide after 2 sec (adjust as needed)
-                  }, 2000);
-                }
-              });
-            },
-            { threshold: 0.5 } // Trigger when 50% visible
-          );
-
-          observer.observe(card);
+          }
         });
+        
+        card.addEventListener("mouseleave", () => {
+          if (!isTouching) {
+            content.style.opacity = "0";
+          }
+        });
+
+        // ===== 2. Mobile Touch Effect =====
+        card.addEventListener("touchstart", (e) => {
+          isTouching = true;
+          e.preventDefault();
+          content.style.opacity = "1";
+        });
+
+        card.addEventListener("touchend", () => {
+          isTouching = false;
+          setTimeout(() => {
+            content.style.opacity = "0";
+          }, 1000); // 1-second delay before hiding
+        });
+
+        // ===== 3. Improved Scroll Effect =====
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !isTouching) {
+                content.style.opacity = "1";
+                // Only auto-hide if not being touched
+                if (!('ontouchstart' in window)) {
+                  setTimeout(() => {
+                    if (!isTouching) content.style.opacity = "0";
+                  }, 3000); // Longer 3-second display
+                }
+              }
+            });
+          },
+          { 
+            threshold: 0.3, // Lower threshold for earlier trigger
+            rootMargin: "0px 0px -50px 0px" // Triggers 50px earlier
+          }
+        );
+
+        observer.observe(card);
+      });
 
       // Mobile menu toggle (would need additional implementation)
       document.addEventListener('DOMContentLoaded', function() {
