@@ -17,3 +17,8 @@
   opacity: 1;
   transform: translateY(0);
 }
+.project-content a {
+  position: relative; /* Ensures z-index works */
+  z-index: 10; /* Higher than content container */
+  pointer-events: auto; /* Override any parent settings */
+}
