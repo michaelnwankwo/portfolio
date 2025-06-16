@@ -1046,13 +1046,21 @@
       });
 
       // Project card hover effects
-              document.querySelectorAll(".project-card").forEach((card) => {
+       document.querySelectorAll(".project-card").forEach((card) => {
         const content = card.querySelector(".project-content");
-        let isTouching = false; // Track touch state
-
+        let isTouching = false;
+        let touchTimer = null;
+      
+        // Helper function to check if touch is on a clickable element
+        const isClickableElement = (element) => {
+          return element.tagName === 'A' || 
+                 element.tagName === 'BUTTON' ||
+                 element.closest('a, button, [onclick]');
+        };
+      
         // ===== 1. Desktop Hover Effect =====
         card.addEventListener("mouseenter", () => {
-          if (!isTouching) { // Don't interfere with touch
+          if (!isTouching) {
             content.style.opacity = "1";
           }
         });
@@ -1062,41 +1070,63 @@
             content.style.opacity = "0";
           }
         });
-
+      
         // ===== 2. Mobile Touch Effect =====
         card.addEventListener("touchstart", (e) => {
+          // Skip if touching a clickable element
+          if (isClickableElement(e.target)) {
+            return;
+          }
+          
           isTouching = true;
           e.preventDefault();
           content.style.opacity = "1";
         });
-
-        card.addEventListener("touchend", () => {
+      
+        card.addEventListener("touchend", (e) => {
+          // Skip if releasing on a clickable element
+          if (isClickableElement(e.target)) {
+            isTouching = false;
+            return;
+          }
+      
           isTouching = false;
-          setTimeout(() => {
+          clearTimeout(touchTimer);
+          touchTimer = setTimeout(() => {
             content.style.opacity = "0";
-          }, 1000); // 1-second delay before hiding
+          }, 1000);
         });
 
-        // ===== 3. Improved Scroll Effect =====
-        const observer = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting && !isTouching) {
-                content.style.opacity = "1";
-                // Only auto-hide if not being touched
-                if (!('ontouchstart' in window)) {
-                  setTimeout(() => {
-                    if (!isTouching) content.style.opacity = "0";
-                  }, 3000); // Longer 3-second display
-                }
-              }
-            });
-          },
-          { 
-            threshold: 0.3, // Lower threshold for earlier trigger
-            rootMargin: "0px 0px -50px 0px" // Triggers 50px earlier
+  // Allow link clicks to work normally
+  content.addEventListener("click", (e) => {
+    if (isClickableElement(e.target)) {
+      clearTimeout(touchTimer);
+      return true;
+    }
+  });
+
+  // ===== 3. Improved Scroll Effect =====
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !isTouching) {
+          content.style.opacity = "1";
+          if (!('ontouchstart' in window)) {
+            setTimeout(() => {
+              if (!isTouching) content.style.opacity = "0";
+            }, 3000);
           }
-        );
+        }
+      });
+    },
+    { 
+      threshold: 0.3,
+      rootMargin: "0px 0px -50px 0px"
+    }
+  );
+
+  observer.observe(card);
+});
 
         observer.observe(card);
       });
