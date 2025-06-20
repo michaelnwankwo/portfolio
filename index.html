@@ -1108,31 +1108,29 @@
           });
 
           // ===== 2. Mobile Touch Effect =====
+          let isScrolling = false;
+          let touchStartY = 0;
+          const SCROLL_THRESHOLD = 5;
+
           card.addEventListener("touchstart", (e) => {
-            // Skip if touching a clickable element
-            if (isClickableElement(e.target)) {
-              return;
+            touchStartY = e.touches[0].clientY;
+            isScrolling = false;
+          });
+
+          card.addEventListener("touchmove", (e) => {
+            const yDiff = Math.abs(e.touches[0].clientY - touchStartY);
+            if (yDiff > SCROLL_THRESHOLD) {
+              isScrolling = true;
+              content.style.opacity = "0"; // Hide if scrolling
             }
-            
-            isTouching = true;
-            e.preventDefault();
-            content.style.opacity = "1";
           });
 
           card.addEventListener("touchend", (e) => {
-            // Skip if releasing on a clickable element
-            if (isClickableElement(e.target)) {
-              isTouching = false;
-              return;
+            if (!isScrolling && !isClickableElement(e.target)) {
+              content.style.opacity = "1"; // Show only for taps
+              setTimeout(() => content.style.opacity = "0", 2000);
             }
-
-            isTouching = false;
-            clearTimeout(touchTimer);
-            touchTimer = setTimeout(() => {
-              content.style.opacity = "0";
-            }, 1000);
           });
-
           // Allow link clicks to work normally
           content.addEventListener("click", (e) => {
             if (isClickableElement(e.target)) {
