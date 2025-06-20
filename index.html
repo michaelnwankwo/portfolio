@@ -6,7 +6,6 @@
     <title>Nwankwo Michael | Front-End Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -16,128 +15,25 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="icon" href="images/ghostcode1.ico" type="image/x-icon" />
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #f8fafc;
-        color: #0f172a;
-        scroll-behavior: smooth;
-      }
-      .gradient-text {
-        background-clip: text;
-        -webkit-background-clip: text;
-        color: transparent;
-        background-image: linear-gradient(90deg, #3b82f6, #8b5cf6);
-      }
-      .card-hover {
-        transition: all 0.3s ease;
-      }
-      .card-hover:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      }
-      .skill-bar {
-        transition: width 1.5s ease;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .fade-in {
-        animation: fadeIn 0.8s ease forwards;
-      }
-      .delay-1 {
-        animation-delay: 0.2s;
-      }
-      .delay-2 {
-        animation-delay: 0.4s;
-      }
-      .delay-3 {
-        animation-delay: 0.6s;
-      }
-      .delay-4 {
-        animation-delay: 0.8s;
-      }
-      .delay-5 {
-        animation-delay: 1s;
-      }
-      .nav-link {
-        position: relative;
-      }
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: -2px;
-        left: 0;
-        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-        transition: width 0.3s ease;
-      }
-      .nav-link:hover::after {
-        width: 100%;
-      }
-      .active-nav::after {
-        width: 100%;
-      }
-      .project-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        border-radius: 0.5rem;
-      }
-      .project-card:hover::before {
-        opacity: 1;
-      }
-      .project-content {
-        transform: translateY(20px);
-        transition: transform 0.3s ease;
-      }
-      .project-card:hover .project-content {
-        transform: translateY(0);
-      }
-    </style>
   </head>
-  <class="min-h-screen">
-    <!-- Mobile Menu (hidden by default) -->
-    <div
-      class="mobile-menu hidden fixed inset-0 bg-white/90 backdrop-blur-sm z-40 pt-24 px-6"
-    >
+  <body class="min-h-screen">
+    <!-- Mobile Menu -->
+    <div class="mobile-menu fixed inset-0 opacity-0 invisible transition-all duration-300 bg-white/90 backdrop-blur-sm z-40 pt-24 px-6">
       <div class="flex flex-col space-y-6">
         <a href="#home" class="nav-link active-nav text-xl">Home</a>
         <a href="#about" class="nav-link text-xl">About</a>
         <a href="#skills" class="nav-link text-xl">Skills</a>
-        <a href="#projects" class="nav-link text-xl">Projects</a>
+        <a href="index2.html" class="nav-link text-xl">Certificates</a>
+        <a href="index2.html" class="nav-link text-xl">Projects</a>
         <a href="#contact" class="nav-link text-xl">Contact</a>
         <div class="flex space-x-4">
-          <a
-            href="#"
-            class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-colors"
-          >
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-colors">
             <i class="fab fa-twitter"></i>
           </a>
-          <a
-            href="https://www.instagram.com/theghost_code/"
-            class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-colors"
-          >
+          <a href="https://www.instagram.com/theghost_code/" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-colors">
             <i class="fab fa-instagram"></i>
           </a>
-          <a
-            href="https://wa.me/+2348086850849"
-            class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-colors"
-          >
+          <a href="https://wa.me/+2348086850849" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-pink-500 hover:text-white transition-colors">
             <i class="fab fa-whatsapp"></i>
           </a>
         </div>
@@ -146,9 +42,7 @@
 
     <!-- Navigation -->
     <nav class="fixed w-full bg-white/80 backdrop-blur-sm z-50 shadow-sm">
-      <div
-        class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center"
-      >
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <a href="#" class="text-2xl font-bold gradient-text">
           <img
             src="https://cradle2career.ng/wp-content/uploads/2025/05/AlbedoBase_XL_create_a_logo_for_software_development_brand_wit_3-1.jpg"
@@ -157,10 +51,10 @@
           />
         </a>
         <div class="hidden md:flex space-x-8">
-          <a href="#home" class="nav-link active-nav">Home</a>
+          <a href="#home" class="nav-link active-nav">Home </a>
           <a href="#about" class="nav-link">About</a>
-          <a href="#skills" class="nav-link">Skills</a>
-          <a href="#projects" class="nav-link">Projects</a>
+          <a href="index2.html" class="nav-link">Certificates</a>
+          <a href="index2.html" class="nav-link">Projects</a>
           <a href="#contact" class="nav-link">Contact</a>
         </div>
         <button id="mobileMenuButton" class="md:hidden text-gray-700">
@@ -186,7 +80,7 @@
             </p>
             <div class="flex space-x-4">
               <a
-                href="#projects"
+                href="index2.html"
                 class="px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-full font-medium hover:shadow-lg transition-all duration-300"
                 >View My Work</a
               >
@@ -510,6 +404,7 @@
             <a href="https://www.udemy.com/certificate/UC-b22856ea-4030-491e-b1db-3032a557e135/" class="cert-btn" target="_blank">View Certificate</a>
           </div>
         </div>
+
     
         <!-- <div class="cert-card delay-2" style="background-image: url('cert3.jpg');">
           <div class="cert-darken"></div> 
@@ -519,8 +414,16 @@
             <a href="#" class="cert-btn" target="_blank">View Certificate</a>
           </div>
         </div> -->
+        <div class="text-center mt-12 fade-in delay-5">
+          <a
+            href="index2.html#certificates"
+            class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full font-medium hover:bg-gray-100 transition-all duration-300"
+          >
+            View More Certificates <i class="fas fa-arrow-right ml-2"></i>
+          </a>
+        </div>
     </section>
-    
+   
     
 
     <!-- Projects Section -->
@@ -778,7 +681,7 @@
 
         <div class="text-center mt-12 fade-in delay-5">
           <a
-            href="#"
+            href="index2.html#projects"
             class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full font-medium hover:bg-gray-100 transition-all duration-300"
           >
             View All Projects <i class="fas fa-arrow-right ml-2"></i>
@@ -956,12 +859,12 @@
                 alt="Nwankwo Michael Logo"
                 class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md"
             /></a>
-            <p class="mt-2 text-gray-400">
-              Creating digital experiences that matter.
-            </p>
           </div>
+          <p class="mt-2 text-gray-400">
+            Creating digital experiences that matter.
+          </p>
 
-          <div class="flex space-x-6">
+          <!-- <div class="flex space-x-6">
             <a
               href="#home"
               class="text-gray-400 hover:text-white transition-colors"
@@ -987,7 +890,7 @@
               class="text-gray-400 hover:text-white transition-colors"
               >Contact</a
             >
-          </div>
+          </div> -->
         </div>
 
         <div
@@ -1027,226 +930,6 @@
       </div>
     </footer>
 
-    <script>
-      // Animate elements when they come into view
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("fade-in");
-            }
-          });
-        },
-        {
-          threshold: 0.1,
-        }
-      );
-
-      document.querySelectorAll(".fade-in").forEach((el) => {
-        observer.observe(el);
-      });
-
-      // Animate skill bars when skills section is in view
-      const skillObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              document.querySelectorAll(".skill-bar").forEach((bar) => {
-                bar.style.width =
-                  bar.parentElement.previousElementSibling.lastElementChild.textContent;
-              });
-            }
-          });
-        },
-        {
-          threshold: 0.5,
-        }
-      );
-
-      skillObserver.observe(document.getElementById("skills"));
-
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
-
-          // Update active nav link
-          document.querySelectorAll(".nav-link").forEach((link) => {
-            link.classList.remove("active-nav");
-          });
-          this.classList.add("active-nav");
-        });
-      });
-
-       document.querySelectorAll(".project-card").forEach((card) => {
-          const content = card.querySelector(".project-content");
-          let isTouching = false;
-          let touchTimer = null;
-
-          // Helper function to check if touch is on a clickable element
-          const isClickableElement = (element) => {
-            return element.tagName === 'A' || 
-                  element.tagName === 'BUTTON' ||
-                  element.closest('a, button, [onclick]');
-          };
-
-          // ===== 1. Desktop Hover Effect =====
-          card.addEventListener("mouseenter", () => {
-            if (!isTouching) {
-              content.style.opacity = "1";
-            }
-          });
-          
-          card.addEventListener("mouseleave", () => {
-            if (!isTouching) {
-              content.style.opacity = "0";
-            }
-          });
-
-          // ===== 2. Mobile Touch Effect =====
-          let isScrolling = false;
-          let touchStartY = 0;
-          const SCROLL_THRESHOLD = 5;
-
-          card.addEventListener("touchstart", (e) => {
-            touchStartY = e.touches[0].clientY;
-            isScrolling = false;
-          });
-
-          card.addEventListener("touchmove", (e) => {
-            const yDiff = Math.abs(e.touches[0].clientY - touchStartY);
-            if (yDiff > SCROLL_THRESHOLD) {
-              isScrolling = true;
-              content.style.opacity = "0"; // Hide if scrolling
-            }
-          });
-
-          card.addEventListener("touchend", (e) => {
-            if (!isScrolling && !isClickableElement(e.target)) {
-              content.style.opacity = "1"; // Show only for taps
-              setTimeout(() => content.style.opacity = "0", 2000);
-            }
-          });
-          // Allow link clicks to work normally
-          content.addEventListener("click", (e) => {
-            if (isClickableElement(e.target)) {
-              clearTimeout(touchTimer);
-              return true;
-            }
-          });
-
-          // ===== 3. Improved Scroll Effect =====
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting && !isTouching) {
-                  content.style.opacity = "1";
-                  if (!('ontouchstart' in window)) {
-                    setTimeout(() => {
-                      if (!isTouching) content.style.opacity = "0";
-                    }, 3000);
-                  }
-                }
-              });
-            },
-            { 
-              threshold: 0.3,
-              rootMargin: "0px 0px -50px 0px"
-            }
-          );
-
-          observer.observe(card);
-        });
-
-      // Mobile menu toggle (would need additional implementation)
-      document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu elements
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const hamburgerButton = document.getElementById('mobileMenuButton');
-            const hamburgerIcon = hamburgerButton.querySelector('i');
-
-            // Toggle mobile menu
-            hamburgerButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-                
-                // Toggle between bars and times icon
-                if (mobileMenu.classList.contains('hidden')) {
-                    hamburgerIcon.classList.remove('fa-times');
-                    hamburgerIcon.classList.add('fa-bars');
-                } else {
-                    hamburgerIcon.classList.remove('fa-bars');
-                    hamburgerIcon.classList.add('fa-times');
-                }
-            });
-
-            // Close mobile menu when a link is clicked
-            document.querySelectorAll('.mobile-menu a').forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.add('hidden');
-                    hamburgerIcon.classList.remove('fa-times');
-                    hamburgerIcon.classList.add('fa-bars');
-                });
-            });
-
-            // Your existing animation and scroll code
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("fade-in");
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll(".fade-in").forEach((el) => {
-                observer.observe(el);
-            });
-
-            // Animate skill bars when skills section is in view
-            const skillObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        document.querySelectorAll(".skill-bar").forEach((bar) => {
-                            bar.style.width =
-                                bar.parentElement.previousElementSibling.lastElementChild.textContent;
-                        });
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            skillObserver.observe(document.getElementById("skills"));
-
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-                anchor.addEventListener("click", function(e) {
-                    e.preventDefault();
-
-                    document.querySelector(this.getAttribute("href")).scrollIntoView({
-                        behavior: "smooth",
-                    });
-
-                    // Update active nav link
-                    document.querySelectorAll(".nav-link").forEach((link) => {
-                        link.classList.remove("active-nav");
-                    });
-                    this.classList.add("active-nav");
-                });
-            });
-
-            // Project card hover effects
-            document.querySelectorAll(".project-card").forEach((card) => {
-                card.addEventListener("mouseenter", () => {
-                    card.querySelector(".project-content").style.opacity = "1";
-                });
-
-                card.addEventListener("mouseleave", () => {
-                    card.querySelector(".project-content").style.opacity = "0";
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
